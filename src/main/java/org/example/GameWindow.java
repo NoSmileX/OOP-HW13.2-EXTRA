@@ -5,6 +5,7 @@ import javax.swing.*;
 public class GameWindow extends JFrame {
     public GameWindow(){
         add(new GameField());
+        setResizable(false);
         setTitle("NYAN CAT (Snake) Game");
         setVisible(true);
         setSize(960, 480);
