@@ -1,8 +1,12 @@
 package org.example;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 
 public class GameField extends JPanel implements ActionListener {
@@ -35,6 +39,7 @@ public class GameField extends JPanel implements ActionListener {
         initializeGame();
         addKeyListener(new FieldKeyListener());
         setFocusable(true);
+        playSound();
 
     }
 
@@ -132,6 +137,17 @@ public class GameField extends JPanel implements ActionListener {
             if (snakePositionY[0] < 0) {
                 isInGame = false;
             }
+        }
+    }
+
+    public void playSound(){
+        File file = new File("1.wav");
+        try (AudioInputStream ais =AudioSystem.getAudioInputStream(file)) {
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
         }
     }
 
